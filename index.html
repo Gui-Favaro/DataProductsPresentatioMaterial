@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project to Coursera</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Project to Coursera">
+  <meta name="author" content="Guilherme M. Favaro">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Project to Coursera</h1>
+    <h2>Data Products</h2>
+    <p>Guilherme M. Favaro<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Slide 2 - Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This is the project for coursera Data Products.</p>
+
+<p>It is pretty basic, using the Iris database and building a cluster with it.</p>
+
+<p>The user can choose the variables in X and Y columns and the number of clusters.</p>
+
+<p>In slide 3 we explain the user interface.</p>
+
+<p>In slide 4 we explain the server.</p>
+
+<p>The fifth slide will show a cluster example.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Slide 3 - The User Interface</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(shiny)
+shinyUI(pageWithSidebar(
+    headerPanel(&#39;My first App: Calculating the Iris k-means clustering&#39;), 
+    sidebarPanel(
+        selectInput(&#39;xcol&#39;, &#39;X Variable&#39;, names(iris)),
+        p(&quot;Choose one of the variables listed above&quot;),
+        selectInput(&#39;ycol&#39;, &#39;Y Variable&#39;, names(iris),
+                    selected=names(iris)[[2]]), 
+        p(&quot;Choose another one of the variables listed above&quot;),
+        numericInput(&#39;clusters&#39;, &#39;Cluster count&#39;, 3,
+                     min = 1, max = 20), 
+        p(&quot;Choose the number of clusters in the range [1-20]&quot;),
+        br(),
+    actionButton(&quot;goButton&quot;, &quot;Clusters shall be made!&quot;), 
+    p(&quot;Click the button to update the cluster with the variables chosen and the numbers
+      of clusters above.&quot;)
+    ),
+    mainPanel(
+        plotOutput(&#39;plot1&#39;)
+    )
+))
+</code></pre>
+
+<p>&lt;!--html_preserve--&gt;<div class="container-fluid"></p>
+
+<div class="row">
+<div class="col-sm-12">
+<h1>My first App: Calculating the Iris k-means clustering</h1>
+</div>
+
+<p></div></p>
+
+<div class="row">
+<div class="col-sm-4">
+<form class="well">
+<div class="form-group shiny-input-container">
+<label class="control-label" for="xcol">X Variable</label>
+<div>
+<select id="xcol"><option value="Sepal.Length" selected>Sepal.Length</option>
+<option value="Sepal.Width">Sepal.Width</option>
+<option value="Petal.Length">Petal.Length</option>
+<option value="Petal.Width">Petal.Width</option>
+<option value="Species">Species</option></select>
+<script type="application/json" data-for="xcol" data-nonempty="">{}</script>
+</div>
+
+<p></div></p>
+
+<p>Choose one of the variables listed above</p>
+
+<div class="form-group shiny-input-container">
+<label class="control-label" for="ycol">Y Variable</label>
+<div>
+<select id="ycol"><option value="Sepal.Length">Sepal.Length</option>
+<option value="Sepal.Width" selected>Sepal.Width</option>
+<option value="Petal.Length">Petal.Length</option>
+<option value="Petal.Width">Petal.Width</option>
+<option value="Species">Species</option></select>
+<script type="application/json" data-for="ycol" data-nonempty="">{}</script>
+</div>
+
+<p></div></p>
+
+<p>Choose another one of the variables listed above</p>
+
+<div class="form-group shiny-input-container">
+<label for="clusters">Cluster count</label>
+<input id="clusters" type="number" class="form-control" value="3" min="1" max="20"/>
+</div>
+
+<p>Choose the number of clusters in the range [1-20]</p>
+
+<p><br/>
+<button id="goButton" type="button" class="btn btn-default action-button">Clusters shall be made!</button></p>
+
+<p>Click the button to update the cluster with the variables chosen and the numbers
+      of clusters above.</p>
+
+<p></form>
+</div></p>
+
+<div class="col-sm-8">
+<div id="plot1" class="shiny-plot-output" style="width: 100% ; height: 400px"></div>
+</div>
+
+<p></div>
+</div>&lt;!--/html_preserve--&gt;</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Slide 4 - The server</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">palette(c(&quot;cadetblue&quot;, &quot;tomato&quot;,&quot;coral3&quot;,
+          &quot;darksalmon&quot;, &quot;firebrick&quot;, &quot;gray88&quot;, &quot;hotpink&quot;, &quot;khaki&quot;,
+          &quot;yellowgreen&quot;, &quot;tan2&quot;, &quot;yellow1&quot;, &quot;steelblue4&quot;,
+          &quot;tan1&quot;, &quot;snow3&quot;,&quot;sienna&quot;,&quot;sienna1&quot;,&quot;cadetblue2&quot;,&quot;maroon1&quot;,&quot;azure4&quot;         
+          ))
+shinyServer(function(input, output, session) {
+
+    selectedData &lt;- eventReactive(input$goButton, {
+        iris[, c(input$xcol, input$ycol)]
+    })
+
+    clusters &lt;- eventReactive(input$goButton, {
+        kmeans(selectedData(), input$clusters)
+    })
+    output$plot1 &lt;- renderPlot({
+        par(mar = c(5.1, 4.1, 0, 1))
+        plot(selectedData(),
+             col = clusters()$cluster,
+             pch = 20, cex = 3)
+        points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+    })
+})
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Slide 5 - An example of cluster</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">newiris &lt;- iris
+newiris$Species &lt;- NULL
+kc &lt;- kmeans(newiris, 3)
+plot(newiris[c(&quot;Sepal.Length&quot;, &quot;Sepal.Width&quot;)], col=kc$cluster)
+points(kc$centers[,c(&quot;Sepal.Length&quot;, &quot;Sepal.Width&quot;)], col=1:3, pch=8, cex=2)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3">
+--- .class #id </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Slide 2 - Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Slide 3 - The User Interface'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Slide 4 - The server'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Slide 5 - An example of cluster'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
